@@ -2,15 +2,16 @@ from fastapi import Depends, HTTPException
 from fastapi.security import OAuth2PasswordRequestForm
 from typing import Annotated
 from sqlalchemy.ext.asyncio import AsyncSession
-from schemas.users import Token, UserLogin, CreateUser
-from services.auth_services import create_user, authenticate_user, get_user
-from utils.auth_utils import create_access_token, create_refresh_token
-from db.models import User
-from db.dependencies import get_db_session
 import jwt
-from core.config import settings
-from core.logger import get_logger
-from utils.users import is_admin_user
+
+from app.schemas.users import Token, UserLogin, CreateUser
+from app.services.auth_services import create_user, authenticate_user, get_user
+from app.utils.auth_utils import create_access_token, create_refresh_token
+from app.utils.users import is_admin_user
+from app.db.models import User
+from app.db.dependencies import get_db_session
+from app.core.config import settings
+from app.core.logger import get_logger
 
 logger = get_logger("auth")
 
@@ -33,7 +34,7 @@ async def invite_user(
         status_code=400, detail=f"User with email {user_data.email} already registered"
     )
 
-
+# Todo: check custom cookie, apply this token in header
 async def swagger_login(
     form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
     session: AsyncSession = Depends(get_db_session),

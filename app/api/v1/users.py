@@ -1,7 +1,8 @@
 from fastapi import Depends
-from utils.users import get_current_user
-from db.models import User
-from core.logger import get_logger
+
+from app.utils.users import get_current_user
+from app.db.models import User
+from app.core.logger import get_logger
 
 logger = get_logger("users")
 

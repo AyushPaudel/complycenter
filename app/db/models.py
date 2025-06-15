@@ -2,7 +2,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import String, ForeignKey, Text, Float
 from .base import PrimaryUUIDTimestampedModel, BaseModel
 from sqlalchemy.dialects.postgresql import UUID
-from core.config import settings
+from app.core.config import settings
 
 
 class User(PrimaryUUIDTimestampedModel):

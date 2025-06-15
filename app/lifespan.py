@@ -1,12 +1,16 @@
 from contextlib import asynccontextmanager
 from collections.abc import AsyncGenerator
+import ssl 
 
 from fastapi import FastAPI
 from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine, AsyncSession
 from sqlalchemy import select
-from core.config import settings
-from db.models import User
-from schemas.users import UserRole
+from app.core.config import settings
+from app.db.models import User
+from app.schemas.users import UserRole
+
+
+ssl_context = ssl.create_default_context(cafile="app/ca.pem")
 
 
 def _setup_db(app: FastAPI) -> None:  # pragma: no cover
@@ -19,7 +23,8 @@ def _setup_db(app: FastAPI) -> None:  # pragma: no cover
 
     :param app: fastAPI application.
     """
-    engine = create_async_engine(str(settings.db_url), echo=settings.DB_ECHO)
+    engine = create_async_engine(str(settings.db_url), connect_args={"ssl": ssl_context},
+    echo=settings.DB_ECHO,)
     session_factory = async_sessionmaker(
         engine,
         expire_on_commit=False,

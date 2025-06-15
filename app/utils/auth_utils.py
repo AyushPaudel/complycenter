@@ -2,8 +2,9 @@ from pydantic import BaseModel
 from datetime import timedelta, datetime
 from passlib.context import CryptContext
 import jwt
-from core.config import settings
-from db.models import User
+
+from app.core.config import settings
+from app.db.models import User
 
 
 

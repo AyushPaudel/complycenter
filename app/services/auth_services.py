@@ -1,9 +1,10 @@
 from fastapi import Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
-from db.models import User
-from db.dependencies import get_db_session
 from pydantic import EmailStr
+
+from app.db.models import User
+from app.db.dependencies import get_db_session
 
 
 async def create_user(

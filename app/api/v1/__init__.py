@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from schemas.users import ReturnUser, Token
+from app.schemas.users import ReturnUser, Token
 from .auth import invite_user, swagger_login, get_token, refresh_token
 from .users import get_profile
 from .business import (
@@ -9,7 +9,7 @@ from .business import (
     update_business,
     delete_business,
 )
-from schemas.business import BusinessBase
+from app.schemas.business import BusinessBase
 
 v1router = APIRouter(prefix="/api/v1")
 

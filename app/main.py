@@ -1,8 +1,10 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
-from lifespan import lifespan_setup
-from api.v1 import v1router
-from core.logger import get_logger
+
+from app.lifespan import lifespan_setup
+from app.api.v1 import v1router
+from app.core.logger import get_logger
 
 # Initialize logger
 logger = get_logger("main")
@@ -15,6 +17,13 @@ app = FastAPI(
     lifespan=lifespan_setup,
 )
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allow all origins for development; restrict in production
+    allow_credentials=True,
+    allow_methods=["*"],  # Allow all methods; restrict in production
+    allow_headers=["*"],  # Allow all headers; restrict in production
+)
 
 @app.get("/health", include_in_schema=False)
 async def health_check():

@@ -1,11 +1,12 @@
 from fastapi import Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
-from schemas.business import BusinessBase
-from db.models import User, Business
 from sqlalchemy.future import select
-from db.dependencies import get_db_session
-from core.logger import get_logger
-from utils.users import is_admin_user
+
+from app.schemas.business import BusinessBase
+from app.db.models import User, Business
+from app.db.dependencies import get_db_session
+from app.core.logger import get_logger
+from app.utils.users import is_admin_user
 
 logger = get_logger("business")
 

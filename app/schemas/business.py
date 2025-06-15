@@ -8,18 +8,10 @@ class Location(BaseModel):
     longitude: float
 
 
-class UserBusiness(BaseModel):
-    user_id: str = Field(..., description="ID of the user")
-    business_id: str = Field(..., description="ID of the business")
-
-    class Config:
-        orm_mode = True
-
-
 class BusinessBase(BaseModel):
     name: str
     location: Location
-    user: Optional[List[UserBusiness]] = None
+    user: Optional[List[UUID]] = None
     email: Optional[str] = None
     phone_number: Optional[str] = None
     display_picture: Optional[str] = None

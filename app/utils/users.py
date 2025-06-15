@@ -1,13 +1,14 @@
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 import jwt
-from db.models import User
-from core.config import settings
-from services.auth_services import get_active_user
+from sqlalchemy.ext.asyncio import AsyncSession
 import string
 import random
-from sqlalchemy.ext.asyncio import AsyncSession
-from db.dependencies import get_db_session
+
+from app.db.models import User
+from app.db.dependencies import get_db_session
+from app.core.config import settings
+from app.services.auth_services import get_active_user
 
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="api/v1/swagger-login")

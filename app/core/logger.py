@@ -1,6 +1,7 @@
 from loguru import logger
 from pathlib import Path
-from core.config import settings
+
+from app.core.config import settings
 
 # Ensure logs directory exists
 LOG_DIR = Path("logs")

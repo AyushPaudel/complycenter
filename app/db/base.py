@@ -10,7 +10,7 @@ from sqlalchemy.orm import (
     registry,
 )
 from datetime import datetime
-from core.config import settings
+from app.core.config import settings
 
 
 get_current_time = lambda : datetime.now(tz=settings.timezone)
